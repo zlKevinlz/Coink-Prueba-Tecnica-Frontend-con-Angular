@@ -1,0 +1,113 @@
+<mat-sidenav-container>
+    <mat-sidenav class="" #sidenav="matSidenav"
+        [mode]="(isHandset$ | async) ? 'over' : 'side'"
+        [opened]="(isHandset$ | async) === false">
+
+        <mat-toolbar>
+
+            <img class="ml-12 object-contain w-24 h-14"
+                src="../../../assets/coink_logo.png">
+
+        </mat-toolbar>
+
+        <div class="sidenav_container">
+
+            <div class="image_container">
+
+                <div class="avatar mat-elevation-z8"></div>
+
+            </div>
+
+            <div class="name_container">
+                <mat-icon>lock</mat-icon>
+                <span class="name">Jeff</span>
+            </div>
+
+            <mat-divider></mat-divider>
+
+            <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+                <!-- This is the tree node template for leaf nodes -->
+                <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding
+                    (click)="getNode(node)"
+                    [ngStyle]="{
+                    'background-color': 'padding-left: 40px' ? 'white' : 'var(--color_2) !important',
+                    'color': 'padding-left: 40px' ? 'black' : '',
+                    'cursor': 'padding-left: 40px' ? 'pointer' : ''}">
+                    <!-- use a disabled button to provide padding for tree leaf -->
+                    <button mat-icon-button disabled></button>
+                    {{node.name}}
+                </mat-tree-node>
+                <!-- This is the tree node template for expandable nodes -->
+                <mat-tree-node *matTreeNodeDef="let node;when: hasChild"
+                    matTreeNodePadding>
+
+                    <button mat-icon-button matTreeNodeToggle
+                        [attr.aria-label]="node.name + 'Toggle'">
+                        <mat-icon class="mat-icon-rtl-mirror">
+                            {{treeControl.isExpanded(node) ? 'expand_more' :
+                            'chevron_right'}}
+                        </mat-icon>
+                    </button>
+                    {{node.name}}
+                </mat-tree-node>
+            </mat-tree>
+
+        </div>
+
+
+    </mat-sidenav>
+
+    <mat-sidenav-content class="sidenav_content">
+        <mat-toolbar>
+            <button mat-icon-button (click)="sidenav.toggle()"
+                class="btns_toolbar">
+                <mat-icon>menu</mat-icon>
+            </button>
+
+            <span>
+                BACKOFFICE
+            </span>
+
+            <button mat-icon-button color="accent" class="btns_toolbar">
+                <mat-icon>account_circle</mat-icon>
+            </button>
+        </mat-toolbar>
+
+        <div class="content mat-elevation-z8">
+            Main content here!
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>
+
+<!-- <mat-sidenav-container class="main_container" autosize>
+    <mat-sidenav #drawer opened="true" class="sidenav" mode="side" fixedInViewport> 
+    
+        <mat-toolbar>
+            
+            <img class="ml-12 object-contain w-24 h-14" src="../../../assets/coink_logo.png">
+
+        </mat-toolbar>
+
+    </mat-sidenav>
+
+    <mat-sidenav-content class="sidenav_content">
+        <mat-toolbar>
+            <button mat-icon-button (click)="drawer.toggle()"
+                class="btns_toolbar">
+                <mat-icon>menu</mat-icon>
+            </button>
+
+            <span>
+                BACKOFFICE
+            </span>
+
+            <button mat-icon-button color="accent" class="btns_toolbar">
+                <mat-icon>account_circle</mat-icon>
+            </button>
+        </mat-toolbar>
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+
+
+
+</mat-sidenav-container> -->
