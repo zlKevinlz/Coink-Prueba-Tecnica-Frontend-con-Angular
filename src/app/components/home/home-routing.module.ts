@@ -1,16 +1,16 @@
-import { CardRequestsComponent } from './card-requests.component';
+import { HomeComponent } from './home.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
     path: '',
-    component: CardRequestsComponent
-  },
+    component: HomeComponent
+  }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class CardRequestsRoutingModule { }
+export class HomeRoutingModule { }
